@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* บังคับเปลี่ยนเมาส์ทั้งหน้าเว็บ */
+body {
+  /* ใส่ชื่อไฟล์รูปของคุณ และปรับจุดศูนย์กลางของเมาส์ (เช่น 16 16) */
+  cursor:
+    url("/src/assets/mouse.svg") 16 16,
+    auto;
+}
+
+/* ถ้าอยากให้ตอนชี้ปุ่มหรือลิงก์เปลี่ยนเป็นอีกลาย */
+a,
+button {
+  cursor:
+    url("/src/assets/mouse.svg") 16 16,
+    pointer;
+}

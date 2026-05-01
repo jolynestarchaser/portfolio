@@ -1,0 +1,59 @@
+import { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import IntroScreen from "../components/IntroScreen";
+
+export default function Home() {
+  const [isIntroDone, setIsIntroDone] = useState(false);
+  const containerRef = useRef(null);
+
+  // ล็อคไม่ให้ Scroll ได้จนกว่า Intro จะเล่นจบและสไลด์หายไป
+  useEffect(() => {
+    if (!isIntroDone) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isIntroDone]);
+
+  // แอนิเมชันหน้า Home (เอา ScrollTrigger ออกก่อน ใช้แค่ Delay รอให้ม่านเปิดสุด)
+
+  return (
+    <div ref={containerRef} className="bg-[#77FF00] min-h-screen">
+      {/* หน้า Intro ลอยทับอยู่ข้างบนสุด */}
+      {!isIntroDone && <IntroScreen onComplete={() => setIsIntroDone(true)} />}
+
+      {/* เนื้อหาหน้า Home ที่ซ่อนอยู่ข้างล่าง พอ Intro สไลด์ขึ้นไปก็จะเห็นหน้านี้ */}
+      <main className="text-black font-sans pt-32 pb-24 relative z-0 min-h-screen content-center">
+        <div className="container mx-auto px-6 flex flex-col justify-center">
+          <div className="max-w-4xl">
+            <h2 className="fade-up text-[#000000] font-semibold tracking-widest uppercase mb-4">
+              Creative Technologist
+            </h2>
+
+            <h1 className="fade-up text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-8">
+              Jolyne <br /> ⭑Starchaser
+            </h1>
+
+            <p className="fade-up text-black text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
+              Creative and adaptable Software Developer transitioning from a
+              successful 4-year career in graphic design, recently completing a
+              MERN stack bootcamp. Combines strong frontend capabilities (HTML,
+              CSS, JavaScript) with advanced design expertise (Figma, Adobe
+              Creative Suite) to deliver intuitive user experiences. A proactive
+              problem-solver with a continuous learning mindset, ready to drive
+              impactful results in a collaborative team
+            </p>
+
+            <button className="fade-up bg-[#77FF00] text-black px-8 py-4 font-bold uppercase tracking-wide hover:bg-white transition-colors">
+              View My Work
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
