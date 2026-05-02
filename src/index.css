@@ -10,6 +10,12 @@ body {
   cursor:
     url("/src/assets/mouse.svg") 16 16,
     auto;
+  -ms-overflow-style: none; /* สำหรับ Internet Explorer และ Edge */
+  scrollbar-width: none; /* สำหรับ Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* สำหรับ Chrome, Safari และ Opera */
 }
 
 /* ถ้าอยากให้ตอนชี้ปุ่มหรือลิงก์เปลี่ยนเป็นอีกลาย */
@@ -18,4 +24,37 @@ button {
   cursor:
     url("/src/assets/mouse.svg") 16 16,
     pointer;
+}
+
+/* src/index.css */
+
+/* คลาสสำหรับซ่อน Scrollbar แต่ยังเลื่อนนิ้วปัดได้ปกติ */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* 1. กำหนดความกว้างของแถบ Scrollbar แนวตั้ง */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* 2. สีพื้นหลังของรางเลื่อน (Track) - จัดสีดำให้กลืนกับเว็บ */
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+/* 3. สีของแท่งเลื่อน (Thumb) - จัดสีเขียวสะท้อนแสงของคุณเลยครับ */
+::-webkit-scrollbar-thumb {
+  background: #77ff00;
+  border-radius: 6px; /* ทำขอบมนให้ดูละมุนขึ้น */
+  border: 3px solid #000000; /* ทริค: ใส่ขอบสีดำให้แท่งเขียวดูเล็กลงและไม่เตะตาเกินไป */
+}
+
+/* 4. ลูกเล่นตอนเอาเมาส์ไปชี้ที่แท่งเลื่อน (Hover) */
+::-webkit-scrollbar-thumb:hover {
+  background: #5bd100; /* เปลี่ยนสีเขียวให้เข้มขึ้นนิดนึงตอนชี้เมาส์ */
 }
