@@ -40,7 +40,7 @@ export default function VideoCard({ video }) {
 
       {/* Overlay ข้อมูลวิดีโอ */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-8 flex flex-col justify-end pointer-events-none">
-        <h3 className="text-[#77FF00] text-2xl font-black uppercase italic leading-none mb-2">
+        <h3 className="text-[#77FF00] text-2xl font-black  italic leading-none mb-2">
           {video.title}
         </h3>
         <p className="text-white/70 text-sm line-clamp-2">
