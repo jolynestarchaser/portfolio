@@ -1,10 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import IntroScreen from "../components/IntroScreen";
 import JoeImg from "../assets/joe.webp";
 import InstraGram from "../components/InstraGram";
 import { videoData } from "../data/vid";
+import VideoCard from "../components/VideoCard";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const [isIntroDone, setIsIntroDone] = useState(false);
@@ -67,46 +71,24 @@ export default function Home() {
           </div>
         </div>
 
-        {/* --- ส่วน Instagram --- */}
-        <div className="mt-10 md:mt-0">
-          <InstraGram imgLink={"./assets/time.mp4"} />
-        </div>
-
-        {/* --- ส่วน Video Gallery (Mobile App Carousel) --- */}
-        <section className="mt-16 md:mt-32 mb-32">
-          <div className="flex items-end justify-between mb-6 md:mb-10 border-b-4 border-black pb-4">
+        {/* --- ส่วน Video Gallery (Horizontal Swipe) --- */}
+        <section className="mt-20 mb-32 overflow-hidden">
+          {/* หัวข้อ */}
+          <div className="container mx-auto px-5 mb-10 flex items-end justify-between border-b-4 border-black pb-4">
             <h2 className="text-3xl md:text-5xl font-black uppercase">
-              Selected Works
+              Showreel
             </h2>
-            {/* คำแนะนำให้ปัดจอ (โชว์แค่มือถือ) */}
-            <span className="md:hidden text-xs font-bold uppercase tracking-widest opacity-60 flex items-center gap-1">
-              Swipe <span className="text-lg">➔</span>
-            </span>
           </div>
 
-          {/* 🌟 พระเอกของงาน: คอนเทนเนอร์ปัดซ้ายขวาบนมือถือ (snap-x) */}
-          <div className="flex md:grid md:grid-cols-2 gap-6 overflow-x-auto snap-x snap-mandatory pb-8 hide-scrollbar">
+          {/* 🌟 กล่อง Carousel ปัดซ้ายขวา */}
+          <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-5 md:px-[10vw] pb-10 hide-scrollbar">
+            {/* 🌟 วนลูปเรียกใช้ VideoCard ที่เรา Import มา */}
             {videoData.map((video) => (
-              // กล่องการ์ด: มือถือกว้าง 85% ของจอ (min-w-[85vw]) ให้เห็นขอบการ์ดใบถัดไปนิดๆ ดึงดูดให้ปัด
-              <div
-                key={video.id}
-                className="min-w-[85vw] md:min-w-0 snap-center bg-black text-[#77FF00] p-5 rounded-3xl flex flex-col shadow-2xl"
-              >
-                <div className="w-full aspect-video bg-gray-900 rounded-2xl overflow-hidden mb-5 relative">
-                  <video
-                    src={video.videoUrl}
-                    controls
-                    className="w-full h-full object-cover absolute inset-0"
-                  />
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold uppercase tracking-wide leading-tight">
-                  {video.title}
-                </h3>
-                <p className="text-white mt-2 opacity-80 text-sm">
-                  {video.description}
-                </p>
-              </div>
+              <VideoCard key={video.id} video={video} />
             ))}
+
+            {/* กล่องใสๆ ดันขอบตัวสุดท้ายให้มีที่ว่างตอนปัดสุดจอ */}
+            <div className="shrink-0 md:w-[10vw] h-full"></div>
           </div>
         </section>
       </main>

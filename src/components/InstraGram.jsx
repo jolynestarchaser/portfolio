@@ -1,4 +1,4 @@
 export default function InstraGram({ imgLink }) {
-  return;
-  <>{imgLink}</>;
+  // แก้เป็นแบบนี้ครับ
+  return <>{imgLink}</>;
 }

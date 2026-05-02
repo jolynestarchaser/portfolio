@@ -8,7 +8,7 @@
 body {
   /* ใส่ชื่อไฟล์รูปของคุณ และปรับจุดศูนย์กลางของเมาส์ (เช่น 16 16) */
   cursor:
-    url("/src/assets/mouse.svg") 16 16,
+    url("/src/assets/mouse.svg") 0 0,
     auto;
   -ms-overflow-style: none; /* สำหรับ Internet Explorer และ Edge */
   scrollbar-width: none; /* สำหรับ Firefox */
@@ -22,7 +22,7 @@ body::-webkit-scrollbar {
 a,
 button {
   cursor:
-    url("/src/assets/mouse.svg") 16 16,
+    url("/src/assets/mouse.svg") 0 0,
     pointer;
 }
 

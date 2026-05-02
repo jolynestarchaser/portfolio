@@ -78,13 +78,13 @@ export default function IntroScreen({ onComplete }) {
             Howler.ctx.resume().then(() => {
               if (!bgMusic.playing()) {
                 bgMusic.play();
-                bgMusic.fade(0, 0.3, 2000);
+                bgMusic.fade(0, 1.0, 2000);
               }
             });
           } else {
             if (!bgMusic.playing()) {
               bgMusic.play();
-              bgMusic.fade(0, 0.3, 2000);
+              bgMusic.fade(0, 1.0, 2000);
             }
           }
 
@@ -113,6 +113,7 @@ export default function IntroScreen({ onComplete }) {
 
         window.addEventListener("wheel", triggerStarTransition);
         window.addEventListener("touchstart", triggerStarTransition);
+        window.addEventListener("click", triggerStarTransition);
       });
     },
     { scope: containerRef },
