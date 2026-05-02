@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import starSvg from "../assets/star.svg";
 import { Howler } from "howler";
 import { bgMusic } from "../utils/sounds";
+import mouseCursor from "../assets/mouse.svg";
 
 export default function IntroScreen({ onComplete }) {
   const containerRef = useRef(null);
@@ -64,24 +65,24 @@ export default function IntroScreen({ onComplete }) {
           ease: "power1.inOut",
         });
 
-        let isTransitioning = false; 
+        let isTransitioning = false;
 
         const triggerStarTransition = () => {
-          if (isTransitioning) return; 
-          isTransitioning = true; 
+          if (isTransitioning) return;
+          isTransitioning = true;
 
           window.removeEventListener("wheel", triggerStarTransition);
           window.removeEventListener("touchstart", triggerStarTransition);
 
-          if (Howler.ctx && Howler.ctx.state === 'suspended') {
+          if (Howler.ctx && Howler.ctx.state === "suspended") {
             Howler.ctx.resume().then(() => {
-              if (!bgMusic.playing()) { 
+              if (!bgMusic.playing()) {
                 bgMusic.play();
                 bgMusic.fade(0, 0.3, 2000);
               }
             });
           } else {
-            if (!bgMusic.playing()) { 
+            if (!bgMusic.playing()) {
               bgMusic.play();
               bgMusic.fade(0, 0.3, 2000);
             }
@@ -93,17 +94,21 @@ export default function IntroScreen({ onComplete }) {
             opacity: 0,
             scale: 0.9,
             duration: 0.8,
-            ease: "power3.inOut"
+            ease: "power3.inOut",
           });
 
-          tlTransition.to(containerRef.current, {
-            "--star-size": "4000px", 
-            duration: 1.5,
-            ease: "power4.inOut",
-            onComplete: () => {
-              if (onComplete) onComplete();
-            }
-          }, "-=0.5"); 
+          tlTransition.to(
+            containerRef.current,
+            {
+              "--star-size": "8000px",
+              duration: 1.5,
+              ease: "power4.inOut",
+              onComplete: () => {
+                if (onComplete) onComplete();
+              },
+            },
+            "-=0.5",
+          );
         };
 
         window.addEventListener("wheel", triggerStarTransition);
@@ -116,15 +121,16 @@ export default function IntroScreen({ onComplete }) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 w-full flex flex-col items-center justify-center bg-[#000000] text-[#77FF00] font-sans"
+      className="fixed inset-0 z-50 w-full flex flex-col items-center justify-center bg-[#000000] text-[#77FF00] font-sans "
       style={{
-        "--star-size": "0px", 
+        cursor: `url("${mouseCursor}") 16 16, auto`,
+        "--star-size": "0px",
         WebkitMaskImage: `url("${starSvg}"), linear-gradient(white, white)`,
         WebkitMaskPosition: "center, center",
         WebkitMaskRepeat: "no-repeat, no-repeat",
         WebkitMaskSize: "var(--star-size), 100%",
         WebkitMaskComposite: "destination-out",
-        maskComposite: "exclude", 
+        maskComposite: "exclude",
       }}
     >
       <div className="absolute top-6 left-6 text-sm font-semibold opacity-70">

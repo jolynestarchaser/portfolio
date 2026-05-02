@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import IntroScreen from "../components/IntroScreen";
+import JoeImg from "../assets/joe.webp";
 
 export default function Home() {
   const [isIntroDone, setIsIntroDone] = useState(false);
@@ -27,9 +28,9 @@ export default function Home() {
       {!isIntroDone && <IntroScreen onComplete={() => setIsIntroDone(true)} />}
 
       {/* เนื้อหาหน้า Home ที่ซ่อนอยู่ข้างล่าง พอ Intro สไลด์ขึ้นไปก็จะเห็นหน้านี้ */}
-      <main className="text-black font-sans pt-32 pb-24 relative z-0 min-h-screen content-center">
-        <div className="container mx-auto px-6 flex flex-col justify-center">
-          <div className="max-w-4xl">
+      <main className="text-black font-sans elative z-0 min-h-screen content-center container mx-auto">
+        <div className="flex flex-col md:flex-row items-stretch gap-8 md:gap-12">
+          <div className="flex-1 flex flex-col justify-center">
             <h2 className="fade-up text-[#000000] font-semibold tracking-widest uppercase mb-4">
               Creative Technologist
             </h2>
@@ -48,9 +49,12 @@ export default function Home() {
               impactful results in a collaborative team
             </p>
 
-            <button className="fade-up bg-[#77FF00] text-black px-8 py-4 font-bold uppercase tracking-wide hover:bg-white transition-colors">
+            <button className="fade-up bg-[#77FF00] text-black  font-bold uppercase tracking-wide flex justify-first">
               View My Work
             </button>
+          </div>
+          <div className="flex-1 w-full relative min-h-[400px] md:min-h-0">
+            <img src={JoeImg} className=""></img>
           </div>
         </div>
       </main>
